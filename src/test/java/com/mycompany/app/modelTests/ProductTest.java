@@ -1,6 +1,6 @@
 package com.mycompany.app.modelTests;
 
-import com.mycompany.app.models.Product;
+import com.mycompany.app.model.Product;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

@@ -1,4 +1,4 @@
-package com.mycompany.app.models;
+package com.mycompany.app.model;
 
 public class Product {
 
