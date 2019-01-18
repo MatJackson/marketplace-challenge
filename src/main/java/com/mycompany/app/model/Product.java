@@ -1,13 +1,28 @@
 package com.mycompany.app.model;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
+
+@Entity
 public class Product {
 
-    private final long id;
-    private final String title;
-    private final double price;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+    @NotNull(message = "Product title is required.")
+    @Basic(optional = false)
+    private String title;
+
+    @NotNull
+    private double price;
+
+    @PositiveOrZero
     private int inventory_count;
 
-    public Product(long id, String title, double price, int inventoryCount) {
+    public Product(long id, @NotNull(message = "Product title is required.") String title,
+                   double price, @PositiveOrZero(message = "inventory count must be 0 or positive")int inventoryCount) {
         this.id = id;
         this.title = title;
         this.price = price;
@@ -28,6 +43,18 @@ public class Product {
 
     public int getInventory_count() {
         return inventory_count;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public void setInventory_count(int inventory_count) {
