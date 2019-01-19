@@ -21,6 +21,8 @@ public class Product {
     @PositiveOrZero
     private int inventory_count;
 
+    public Product() { }
+
     public Product(long id, @NotNull(message = "Product title is required.") String title,
                    double price, @PositiveOrZero(message = "inventory count must be 0 or positive")int inventoryCount) {
         this.id = id;
