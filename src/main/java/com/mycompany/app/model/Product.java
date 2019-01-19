@@ -19,7 +19,7 @@ public class Product {
     private double price;
 
     @PositiveOrZero
-    private int inventory_count;
+    private int inventory;
 
     public Product() { }
 
@@ -28,7 +28,7 @@ public class Product {
         this.id = id;
         this.title = title;
         this.price = price;
-        this.inventory_count = inventoryCount;
+        this.inventory = inventoryCount;
     }
 
     public long getId() {
@@ -43,8 +43,8 @@ public class Product {
         return price;
     }
 
-    public int getInventory_count() {
-        return inventory_count;
+    public int getInventory() {
+        return inventory;
     }
 
     public void setId(long id) {
@@ -59,8 +59,8 @@ public class Product {
         this.price = price;
     }
 
-    public void setInventory_count(int inventory_count) {
-        this.inventory_count = inventory_count;
+    public void setInventory(int inventory) {
+        this.inventory = inventory;
     }
 
     @Override
@@ -69,11 +69,11 @@ public class Product {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", price=" + price +
-                ", inventory_count=" + inventory_count +
+                ", inventory=" + inventory +
                 '}';
     }
 
-    public boolean inventoryNotEmpty() {
-        return inventory_count > 0;
+    public boolean inventoryEmpty() {
+        return inventory < 1;
     }
 }

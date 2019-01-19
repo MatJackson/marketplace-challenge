@@ -9,7 +9,11 @@ import javax.validation.constraints.NotNull;
 @Validated
 public interface ProductService {
 
-    @NotNull Iterable<Product> getAllProducts();
+    @NotNull
+    Iterable<Product> getAllProducts();
+
+    @NotNull
+    Iterable<Product> getAllAvailableProducts();
 
     Product getProduct(@Min(value = 1L, message = "Invalid product ID.") long id);
 

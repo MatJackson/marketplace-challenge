@@ -29,10 +29,10 @@ public class Application
             productService.save(new Product(9L, "Xbox", 250.00, 2));
             productService.save(new Product(10L, "Potted Plant", 15.00, 0));
             productService.save(new Product(11L, "Desk", 150.00, 4));
-            productService.save(new Product(12L, "Chair", 50.00, 2));
+            productService.save(new Product(12L, "Chair", 50.00, 0));
             productService.save(new Product(13L, "Mason Jar", 2.99, 48));
             productService.save(new Product(14L, "Pen", 3.99, 6));
-            productService.save(new Product(15L, "Tick Tacks", 2.99, 100));
+            productService.save(new Product(15L, "Tick Tacks", 2.99, 0));
             productService.save(new Product(16L, "Backpack", 29.99, 3));
             productService.save(new Product(17L, "Fishnet Stockings", 16.88, 18));
             productService.save(new Product(18L, "Echo Dot", 69.99, 2));

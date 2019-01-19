@@ -21,6 +21,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public Iterable<Product> getAllAvailableProducts() {
+        return productRepository.findByInventoryGreaterThan(0);
+    }
+
+    @Override
     public Product getProduct(long id) {
         return productRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product not found"));
     }
@@ -29,4 +34,6 @@ public class ProductServiceImpl implements ProductService {
     public Product save(Product product) {
         return productRepository.save(product);
     }
+
+
 }

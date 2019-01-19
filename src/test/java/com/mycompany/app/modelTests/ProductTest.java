@@ -7,14 +7,14 @@ import static org.junit.Assert.*;
 public class ProductTest {
 
     @Test
-    public void t001_inventoryNotEmptyTest() {
+    public void t001_inventoryEmptyTest() {
         Product product = new Product(1, "Test Product", 5.99, 1);
-        assertTrue("Inventory Count is greater than 0", product.inventoryNotEmpty());
+        assertFalse("Inventory Count is greater than 0", product.inventoryEmpty());
 
-        product.setInventory_count(10);
-        assertTrue("Inventory Count is greater than 0", product.inventoryNotEmpty());
+        product.setInventory(10);
+        assertFalse("Inventory Count is greater than 0", product.inventoryEmpty());
 
-        product.setInventory_count(0);
-        assertFalse("Inventory Count is 0", product.inventoryNotEmpty());
+        product.setInventory(0);
+        assertTrue("Inventory Count is 0", product.inventoryEmpty());
     }
 }
