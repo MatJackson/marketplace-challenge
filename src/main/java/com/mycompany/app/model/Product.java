@@ -1,5 +1,7 @@
 package com.mycompany.app.model;
 
+import com.mycompany.app.exception.InventoryEmptyException;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
@@ -75,5 +77,14 @@ public class Product {
 
     public boolean inventoryEmpty() {
         return inventory < 1;
+    }
+
+    public Product decrementInventory() {
+        if (inventoryEmpty()) {
+            throw new InventoryEmptyException("Product is not in stock");
+        } else {
+            inventory--;
+            return this;
+        }
     }
 }

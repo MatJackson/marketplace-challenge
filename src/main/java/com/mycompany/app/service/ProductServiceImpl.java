@@ -47,4 +47,9 @@ public class ProductServiceImpl implements ProductService {
     public Product save(Product product) {
         return productRepository.save(product);
     }
+
+    @Override
+    public Product purchase(long id) {
+        return productRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product not found")).decrementInventory();
+    }
 }

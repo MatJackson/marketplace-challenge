@@ -21,4 +21,6 @@ public interface ProductService {
     Iterable<Product> getProductsInPriceRange(@PositiveOrZero double priceFloor, @Positive double priceCeiling);
 
     Product save(Product product);
+
+    Product purchase(@Min(value = 1L, message = "Invalid product ID.") long id);
 }

@@ -1,11 +1,11 @@
 package com.mycompany.app.controller;
 
+import com.mycompany.app.exception.InventoryEmptyException;
 import com.mycompany.app.model.Product;
 import com.mycompany.app.service.ProductService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotNull;
 
@@ -42,5 +42,14 @@ public class ProductController {
     public @NotNull Iterable<Product> getProductsInPriceRange(@RequestParam(value="priceFrom") double priceFrom,
                                                               @RequestParam(value="priceTo") double priceTo) {
         return productService.getProductsInPriceRange(priceFrom, priceTo);
+    }
+
+    @GetMapping("/purchase")
+    public @NotNull ResponseEntity<Product> purchaseProduct(@RequestParam(value="id") long id) {
+        try {
+            return new ResponseEntity<Product>(productService.purchase(id), HttpStatus.ACCEPTED);
+        } catch (InventoryEmptyException e) {
+            return new ResponseEntity<Product>(productService.getProductById(id), HttpStatus.BAD_REQUEST);
+        }
     }
 }
