@@ -16,9 +16,9 @@ public interface ProductService {
 
     Product getProductById(@Min(value = 1L, message = "Invalid product ID.") long id);
 
-    Product getProductByTitle(@NotBlank String title);
+    Iterable<Product> getProductsByTitle(String title);
 
-    Product getProductInPriceRange(@PositiveOrZero double priceFloor, @Positive double priceCeiling);
+    Iterable<Product> getProductsInPriceRange(@PositiveOrZero double priceFloor, @Positive double priceCeiling);
 
     Product save(Product product);
 }

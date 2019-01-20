@@ -6,6 +6,9 @@ import com.mycompany.app.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
+
 @Service
 @Transactional
 public class ProductServiceImpl implements ProductService {
@@ -26,14 +29,22 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product getProduct(long id) {
+    public Product getProductById(long id) {
         return productRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product not found"));
+    }
+
+    @Override
+    public Iterable<Product> getProductsByTitle(String title) {
+        return productRepository.findByTitleIsContaining(title);
+    }
+
+    @Override
+    public Iterable<Product> getProductsInPriceRange(@PositiveOrZero double priceFloor, @Positive double priceCeiling) {
+        return productRepository.findByPriceBetween(priceFloor, priceCeiling);
     }
 
     @Override
     public Product save(Product product) {
         return productRepository.save(product);
     }
-
-
 }

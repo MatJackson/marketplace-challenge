@@ -27,4 +27,20 @@ public class ProductController {
             return productService.getAllProducts();
         }
     }
+
+    @GetMapping("/id")
+    public @NotNull Product getProductById(@RequestParam(value="id") long id) {
+        return productService.getProductById(id);
+    }
+
+    @GetMapping("/title")
+    public @NotNull Iterable<Product> getProductByTitle(@RequestParam(value="title") String title) {
+        return productService.getProductsByTitle(title);
+    }
+
+    @GetMapping("/priceRange")
+    public @NotNull Iterable<Product> getProductsInPriceRange(@RequestParam(value="priceFrom") double priceFrom,
+                                                              @RequestParam(value="priceTo") double priceTo) {
+        return productService.getProductsInPriceRange(priceFrom, priceTo);
+    }
 }
