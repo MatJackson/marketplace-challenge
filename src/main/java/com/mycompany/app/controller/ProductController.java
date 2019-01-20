@@ -20,36 +20,37 @@ public class ProductController {
     }
 
     @GetMapping(value = { "", "/" })
-    public @NotNull Iterable<Product> getProducts(@RequestParam(value="only-available", defaultValue="false") boolean available) {
-        if (available) {
-            return productService.getAllAvailableProducts();
-        } else {
-            return productService.getAllProducts();
-        }
+    public @NotNull Iterable<Product> getProducts() {
+        return productService.getAllProducts();
     }
 
-    @GetMapping("/id")
-    public @NotNull Product getProductById(@RequestParam(value="id") long id) {
+    @GetMapping("/in-stock")
+    public @NotNull Iterable<Product> getAvailableProducts() {
+        return productService.getAllAvailableProducts();
+    }
+
+    @GetMapping("/id/{id}")
+    public @NotNull Product getProductById(@PathVariable long id) {
         return productService.getProductById(id);
     }
 
-    @GetMapping("/title")
-    public @NotNull Iterable<Product> getProductByTitle(@RequestParam(value="title") String title) {
+    @GetMapping("/title/{title}")
+    public @NotNull Iterable<Product> getProductByTitle(@PathVariable String title) {
         return productService.getProductsByTitle(title);
     }
 
-    @GetMapping("/priceRange")
-    public @NotNull Iterable<Product> getProductsInPriceRange(@RequestParam(value="priceFrom") double priceFrom,
-                                                              @RequestParam(value="priceTo") double priceTo) {
+    @GetMapping("/priceRange/{priceFrom}/{priceTo}")
+    public @NotNull Iterable<Product> getProductsInPriceRange(@PathVariable("priceFrom") double priceFrom,
+                                                              @PathVariable("priceTo") double priceTo) {
         return productService.getProductsInPriceRange(priceFrom, priceTo);
     }
 
-    @GetMapping("/purchase")
-    public @NotNull ResponseEntity<Product> purchaseProduct(@RequestParam(value="id") long id) {
+    @GetMapping("/purchase/{id}")
+    public @NotNull ResponseEntity<Product> purchaseProduct(@PathVariable long id) {
         try {
-            return new ResponseEntity<Product>(productService.purchase(id), HttpStatus.ACCEPTED);
+            return new ResponseEntity<>(productService.purchase(id), HttpStatus.ACCEPTED);
         } catch (InventoryEmptyException e) {
-            return new ResponseEntity<Product>(productService.getProductById(id), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(productService.getProductById(id), HttpStatus.BAD_REQUEST);
         }
     }
 }
