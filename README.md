@@ -1,4 +1,4 @@
-# shopify-2019-intern-challenge
+# Shopify 2019 Intern Challenge
 Barebones of an online marketplace
 
 Built using Spring and Java
