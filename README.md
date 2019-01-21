@@ -18,7 +18,7 @@ API:
 - api/products/purchase/{id} purchase an item by id  
 
 Setup:
-clone repo
+- clone repo
 - mvn clean install
 
 run unit tests:
